@@ -1,0 +1,9 @@
+pluginname=Klausureinsicht
+pluginclassname=Klausureinsicht
+origin=elan-ev
+version=0.1
+category=Sonstiges
+studipMinVersion=4.2
+studipMaxVersion=4.5.99
+descriptionshort=Bereitstellung von Klausuren
+descriptionlong=Mit der Klausureinsicht kann Teilnehmer*innen eine bewertete Klausur in Form eines PDF-Dokumentes zur Verfügung gestellt werden.
