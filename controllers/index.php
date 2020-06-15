@@ -10,6 +10,7 @@ class IndexController extends StudipController
 
         $user = $GLOBALS['user'];
         $this->cid = Course::findCurrent()->id;
+        $this->pdf_url = false;
 
         $datafield = DataField::findOneBySQL('name = ?', array('Matrikelnummer'));
         $datafield_entries = DataFieldEntry::getDataFieldEntries($user->id);
@@ -18,18 +19,19 @@ class IndexController extends StudipController
         $stored_folder = ExamReviewFolders::findOneBySQL('seminar_id = ?', array($this->cid));
 
         if(!empty($stored_folder)) {
-            $file_ref = \FileRef::findOneBySQL('folder_id = ? AND name = ?', array($stored_folder->folder_id, $matrikelnummer.'.pdf'));
-            if($file_ref) {
-                $this->pdf_url = $file_ref->getDownloadURL(); 
-                $visit = ExamReviewVisits::findOneBySQL('seminar_id = ? AND user_id = ?', array($this->cid, $user->id));
-                if(empty($visit)) {
-                    $visit = new ExamReviewVisits();
-                    $visit->seminar_id = $this->cid;
-                    $visit->user_id = $user->id;
-                    $visit->store();
+            $folder = \Folder::findOneBySQL('id = ?', array($stored_folder->folder_id));
+            if($folder->data_content['download_allowed'] == 1) {
+                $file_ref = \FileRef::findOneBySQL('folder_id = ? AND name = ?', array($stored_folder->folder_id, $matrikelnummer.'.pdf'));
+                if($file_ref) {
+                    $this->pdf_url = $file_ref->getDownloadURL(); 
+                    $visit = ExamReviewVisits::findOneBySQL('seminar_id = ? AND user_id = ?', array($this->cid, $user->id));
+                    if(empty($visit)) {
+                        $visit = new ExamReviewVisits();
+                        $visit->seminar_id = $this->cid;
+                        $visit->user_id = $user->id;
+                        $visit->store();
+                    }
                 }
-            } else {
-                $this->pdf_url = false;
             }
         }
     }
