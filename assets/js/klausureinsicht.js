@@ -1,0 +1,10 @@
+$(document).ready(function(){
+    $('.er-settings-edit').click(function(){
+        $('.er-settings-seleted').hide();
+        $('.er-settings-reselect').show();
+    });
+    $('.er-settings-cancel-edit').click(function(){
+        $('.er-settings-seleted').show();
+        $('.er-settings-reselect').hide();
+    });
+});

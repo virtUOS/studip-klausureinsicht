@@ -1,0 +1,59 @@
+/***************
+S E T T I N G S
+***************/
+.er-settings-box {
+    max-width: 600px;
+    border: solid thin #d0d7e3;
+
+}
+.er-settings-header {
+    color: #28497c;
+    background-color: #e7ebf1;
+    margin: 0;
+    padding: 1em;
+    font-weight: 600;
+}
+.er-settings-header button{
+    float: right;
+    border: none;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position-y: bottom;
+    background-size: 16px;
+    height: 16px;
+    width: 16px;
+    cursor: pointer;
+}
+.er-settings-header button.er-settings-edit{
+    background-image: url('../../../../../assets/images/icons/blue/admin.svg');
+}
+.er-settings-header button.er-settings-cancel-edit{
+    background-image: url('../../../../../assets/images/icons/blue/decline.svg');
+}
+
+.er-settings-seleted-content,
+.er-settings-folder {
+    padding: 2em;
+}
+
+.er-settings-selected-foldername {
+    background-image: url('../../../../../assets/images/icons/blue/visibility-invisible/folder-full.svg');
+    background-repeat: no-repeat;
+    background-position-y: bottom;
+    background-size: 16px;
+    padding-left: 24px; 
+    font-size: 1.15em;
+}
+
+.er-settings-reselect {
+    display: none;
+}
+
+.er-settings-folder select[name='folder_id'] {
+    width: 100%;
+}
+
+/***************
+O V E R V I E W
+***************/
+
