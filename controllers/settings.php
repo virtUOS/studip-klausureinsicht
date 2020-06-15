@@ -17,7 +17,14 @@ class SettingsController extends StudipController
             $this->selected_folder = null;
         }
 
-        $this->seminar_folders = \Folder::findBySQL('range_id = ? AND folder_type = ? ORDER BY name', array($this->cid, 'HiddenFolder'));
+        $this->seminar_folders = array();
+        $hidden_folders = \Folder::findBySQL('range_id = ? AND folder_type = ? ORDER BY name', array($this->cid, 'HiddenFolder'));
+        
+        foreach ($hidden_folders as $hidden_folder) {
+            if ($hidden_folder->data_content['download_allowed'] == 1) {
+                array_push($this->seminar_folders, $hidden_folder);
+            }
+        }
     }
 
     public function store_folder_action()

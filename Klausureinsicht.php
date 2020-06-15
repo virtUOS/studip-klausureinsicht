@@ -58,4 +58,12 @@ class Klausureinsicht extends StudIPPlugin implements StandardPlugin
     {
         return null;
     }
+
+    public function perform($unconsumed_path)
+    {
+        PageLayout::addStylesheet($this->getPluginURL() . '/assets/css/klausureinsicht.css');
+        PageLayout::addScript($this->getPluginURL() . '/assets/js/klausureinsicht.js');
+
+        parent::perform($unconsumed_path);
+    }
 }

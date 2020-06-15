@@ -11,6 +11,13 @@ class OverviewController extends StudipController
         $user = $GLOBALS['user'];
         $this->cid = Course::findCurrent()->id;
 
+        $stored_folder = ExamReviewFolders::findOneBySQL('seminar_id = ?', array($this->cid));
+
+        if($stored_folder == null) {
+            $this->hasNoFolder = true;
+        } else {
+            $this->hasNoFolder = false;
+        }
         $review_visits = ExamReviewVisits::findBySQL('seminar_id = ?', array($this->cid));
 
         $this->visits = array();
