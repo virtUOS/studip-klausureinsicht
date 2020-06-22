@@ -13,8 +13,13 @@ class SettingsController extends StudipController
 
         if(!empty($stored_folder)) {
             $this->selected_folder = \Folder::findOneBySQL('range_id = ? AND id = ?', array($this->cid, $stored_folder->folder_id));
+            $this->hasWrongFolder = \Folder::findOneBySQL('range_id = ? AND id = ? AND folder_type = ?', array($this->cid, $stored_folder->folder_id, 'HiddenFolder'))== null;
+            if( $this->selected_folder->data_content['download_allowed'] != 1) {
+                $this->hasWrongFolder = true;
+            }
         } else {
             $this->selected_folder = null;
+            $this->hasWrongFolder = false;
         }
 
         $this->seminar_folders = array();

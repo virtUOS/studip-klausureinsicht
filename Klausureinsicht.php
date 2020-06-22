@@ -39,6 +39,10 @@ class Klausureinsicht extends StudIPPlugin implements StandardPlugin
                 $settings = new Navigation('Einstellungen');
                 $settings->setUrl(PluginEngine::getURL('klausureinsicht/settings'));
                 $navigation->addSubNavigation('settings', $settings);
+
+                $exams = new Navigation('Klausuren');
+                $exams->setUrl(PluginEngine::getURL('klausureinsicht/exams'));
+                $navigation->addSubNavigation('exams', $exams);
             }
 
         }

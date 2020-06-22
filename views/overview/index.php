@@ -9,7 +9,7 @@
             <tr>
                 <th data-sort="text">Nachname</th>
                 <th data-sort="text">Vorname</th>
-                <th data-sort="text">Benutzername</th>
+                <th data-sort="text">Matrikelnummer</th>
                 <th data-sort="time">Datum - Uhrzeit</th>
             </tr>
         </thead>
@@ -17,7 +17,7 @@
         <tr>
             <td><?= $visit['user']->nachname; ?></td>
             <td><?= $visit['user']->vorname; ?></td>
-            <td><?= $visit['user']->username; ?></td>
+            <td><?= $visit['matrikelnummer']; ?></td>
             <td data-sort-value="<?= $visit['date']?>"><?= date('d.m.Y',$visit['date']); ?> - <?= date('H:i',$visit['date'])?> Uhr</td>
         </tr>
     <? endforeach; ?>

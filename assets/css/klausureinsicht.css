@@ -53,7 +53,19 @@ S E T T I N G S
     width: 100%;
 }
 
-/***************
-O V E R V I E W
-***************/
+/***********
+E X S A M S
+************/
+.er-exams-file-not-found {
+    display: none;
+}
 
+#er-exams-select-user {
+    min-width: 500px;
+    overflow: hidden;
+}
+
+
+.er-exams-label {
+    font-weight: 600;
+}

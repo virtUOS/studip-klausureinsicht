@@ -1,5 +1,10 @@
 
-
+<? if($hasWrongFolder): ?>
+    <?= \MessageBox::error(
+        'Der ausgewählte Ordner entspricht nicht dem richtigen Ordnertyp. Bitte ändern Sie den Ordnertyp oder wählen Sie einen anderen Ordner aus.',
+        ['Es sollten nur Ordner vom Typ "Unsichtbarer Ordner" mit gewählter Option "Zugriff auf Dateien per Link erlauben" verwendet werden']
+        ); ?>
+<? endif; ?>
 <? if($selected_folder): ?>
 <div class="er-settings-seleted er-settings-box">
     <header class="er-settings-header">

@@ -22,9 +22,13 @@ class OverviewController extends StudipController
 
         $this->visits = array();
 
+        $datafield = DataField::findOneBySQL('name = ?', array('Matrikelnummer'));
+
         foreach ($review_visits as $visit) {
             $user = User::find($visit->user_id);
-            $visit = array('user' => $user, 'date' => $visit->mkdate);
+            $datafield_entries = DataFieldEntry::getDataFieldEntries($user->id);
+            $matrikelnummer = $datafield_entries[$datafield->id]->value;
+            $visit = array('user' => $user, 'date' => $visit->mkdate, 'matrikelnummer' => $matrikelnummer);
             array_push($this->visits, $visit);
         }
     }
