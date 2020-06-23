@@ -16,36 +16,6 @@ class Klausureinsicht extends StudIPPlugin implements StandardPlugin
     public function __construct()
     {
         parent::__construct();
-
-        $user  = $GLOBALS['user'];
-        $course_id = Course::findCurrent()->id;
-
-        if ($this->isActivated() && Navigation::hasItem('/course')) {
-
-
-            if(!$GLOBALS['perm']->have_studip_perm('dozent', $course_id, $user->id)) {
-                $navigation = new Navigation('Klausureinsicht', PluginEngine::getURL('klausureinsicht/index'));
-                Navigation::insertItem('/course/klausureinsicht', $navigation, 'autor');
-                $navigation->addSubNavigation('index', clone $navigation);
-            }
-
-            if($GLOBALS['perm']->have_studip_perm('dozent', $course_id, $user->id)) {
-                $navigation = new Navigation('Klausureinsicht', PluginEngine::getURL('klausureinsicht/overview'));
-                Navigation::insertItem('/course/klausureinsicht', $navigation, 'autor');
-                $overview = new Navigation('Übersicht');
-                $overview->setUrl(PluginEngine::getURL('klausureinsicht/overview'));
-                $navigation->addSubNavigation('overview', $overview);
-    
-                $settings = new Navigation('Einstellungen');
-                $settings->setUrl(PluginEngine::getURL('klausureinsicht/settings'));
-                $navigation->addSubNavigation('settings', $settings);
-
-                $exams = new Navigation('Klausuren');
-                $exams->setUrl(PluginEngine::getURL('klausureinsicht/exams'));
-                $navigation->addSubNavigation('exams', $exams);
-            }
-
-        }
     }
 
     public function getIconNavigation($course_id, $last_visit, $user_id)
@@ -60,7 +30,32 @@ class Klausureinsicht extends StudIPPlugin implements StandardPlugin
 
     public function getTabNavigation($course_id)
     {
-        return null;
+        $user  = $GLOBALS['user'];
+
+        if(!$GLOBALS['perm']->have_studip_perm('dozent', $course_id, $user->id)) {
+            $navigation = new Navigation('Klausureinsicht', PluginEngine::getURL('klausureinsicht/index'));
+            $navigation->setImage(Icon::create('file_pdf', 'info_alt'));
+            $navigation->setActiveImage(Icon::create('file_pdf', 'info'));
+            $navigation->addSubnavigation('index', clone $navigation);
+        }
+
+        if($GLOBALS['perm']->have_studip_perm('dozent', $course_id, $user->id)) {
+            $navigation = new Navigation('Klausureinsicht', PluginEngine::getURL('klausureinsicht/overview'));
+            $overview = new Navigation('Übersicht');
+            $overview->setUrl(PluginEngine::getURL('klausureinsicht/overview'));
+            $navigation->addSubnavigation('overview', $overview);
+
+            $settings = new Navigation('Einstellungen');
+            $settings->setUrl(PluginEngine::getURL('klausureinsicht/settings'));
+            $navigation->addSubNavigation('settings', $settings);
+
+            $exams = new Navigation('Klausuren');
+            $exams->setUrl(PluginEngine::getURL('klausureinsicht/exams'));
+            $navigation->addSubNavigation('exams', $exams);
+        }
+
+
+        return ['klausureinsicht' => $navigation];
     }
 
     public function perform($unconsumed_path)

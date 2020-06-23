@@ -8,7 +8,6 @@ $(document).ready(function(){
         $('.er-settings-reselect').hide();
     });
 
-
     $('#er-exams-select-user').select2();
 
     $('#er-exams-select-user').change(function(){
@@ -19,11 +18,11 @@ $(document).ready(function(){
         if(fileFound) {
             viewer.attr('src', url);
             $('.er-exams-file-not-found').hide();
-            $('.er-exams-current-exam-username').html(username);
+            $('.er-exams-current-exam-username').text(username);
             $('.er-exams-label-exam').show();
             viewer.show();
         } else {
-            $('#er-exam-username').html(username);
+            $('#er-exam-username').text(username);
             $('.er-exams-file-not-found').show();
             viewer.hide();
             $('.er-exams-label-exam').hide();

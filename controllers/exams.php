@@ -1,14 +1,27 @@
 <?php
+/*
+ * Copyright (c) 2020  Ron Lucke
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ */
 
 class ExamsController extends StudipController
 {
     public function index_action()
     {
-        Navigation::activateItem('/course/klausureinsicht');
+        global $perm;
+
         Navigation::activateItem('/course/klausureinsicht/exams');
         $this->body_id = 'Klausureinsicht-exams';
+        $this->cid = Context::getId();
 
-        $this->cid = Course::findCurrent()->id;
+        if(!$perm->have_studip_perm('dozent', $this->cid)) {
+            throw new AccessDeniedException('Sie verfügen nicht über die notwendigen Rechte für diese Aktion.');
+        }
+
         $course_members = CourseMember::findBySQL('seminar_id = ? AND status = ?', array($this->cid, 'autor'));
         $this->seminar_users = [];
         $datafield = DataField::findOneBySQL('name = ?', array('Matrikelnummer'));
@@ -19,14 +32,14 @@ class ExamsController extends StudipController
 
         if(!empty($this->stored_folder)) {
             $this->hasNoFolder = false;
-            $folder = \Folder::findOneBySQL('id = ? AND folder_type = ?', array($this->stored_folder->folder_id, 'HiddenFolder'));
+            $folder = Folder::findOneBySQL('id = ? AND folder_type = ?', array($this->stored_folder->folder_id, 'HiddenFolder'));
             if($folder->data_content['download_allowed'] == 1) {
                 $this->hasWrongFolder = false;
                 foreach ($course_members as $member) {
                     $user = User::find($member->user_id);
                     $datafield_entries = DataFieldEntry::getDataFieldEntries($member->user_id);
-                    $matrikelnummer = $datafield_entries[$datafield->id]->value;
-                    $file_ref = \FileRef::findOneBySQL('folder_id = ? AND name = ?', array($this->stored_folder->folder_id, $matrikelnummer.'.pdf'));
+                    $matrikelnummer = $datafield_entries[$datafield->id]->getDisplayValue();
+                    $file_ref = FileRef::findOneBySQL('folder_id = ? AND name = ?', array($this->stored_folder->folder_id, $matrikelnummer.'.pdf'));
                     if($file_ref) {
                         $pdf_url = $file_ref->getDownloadURL();
                         $file_found = true;
@@ -35,8 +48,8 @@ class ExamsController extends StudipController
                         $file_found = false;
                     }
                     array_push($this->seminar_users, array(
-                            'user_nachname' => $user->nachname,
-                            'user_vorname' => $user->vorname,
+                            'user_nachname' => htmlReady($user->nachname),
+                            'user_vorname' => htmlReady($user->vorname),
                             'matrikelnummer' => $matrikelnummer,
                             'pdf_url' => $pdf_url,
                             'file_found' => $file_found

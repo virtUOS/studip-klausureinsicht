@@ -15,8 +15,8 @@
         </thead>
     <? foreach ($visits as $visit): ?>
         <tr>
-            <td><?= $visit['user']->nachname; ?></td>
-            <td><?= $visit['user']->vorname; ?></td>
+            <td><?= htmlReady($visit['user']->nachname); ?></td>
+            <td><?= htmlReady($visit['user']->vorname); ?></td>
             <td><?= $visit['matrikelnummer']; ?></td>
             <td data-sort-value="<?= $visit['date']?>"><?= date('d.m.Y',$visit['date']); ?> - <?= date('H:i',$visit['date'])?> Uhr</td>
         </tr>

@@ -10,7 +10,7 @@
 <? if(!$hasNoFolder && !$hasWrongFolder): ?>
 <label class="er-exams-label">Teilnehmende</label><br><select id="er-exams-select-user">
 <? foreach ($seminar_users as $seminar_user): ?>
-   <option data-found="<?= $seminar_user['file_found']; ?>" data-nachname="<?= $seminar_user['user_nachname']; ?>"  data-vorname="<?= $seminar_user['user_vorname']; ?>"  value="<?= $seminar_user['pdf_url']; ?>"><?= $seminar_user['user_nachname']; ?>, <?= $seminar_user['user_vorname']; ?> (<?= $seminar_user['matrikelnummer']; ?>) </option>
+   <option data-found="<?= $seminar_user['file_found']; ?>" data-nachname="<?= htmlReady($seminar_user['user_nachname']); ?>"  data-vorname="<?= htmlReady($seminar_user['user_vorname']); ?>"  value="<?= $seminar_user['pdf_url']; ?>"><?= htmlReady($seminar_user['user_nachname']); ?>, <?= htmlReady($seminar_user['user_vorname']); ?> (<?= $seminar_user['matrikelnummer']; ?>) </option>
 <? endforeach; ?>
 </select>
 <br>
@@ -21,6 +21,4 @@
     Für die Matrikelnummer von <span id="er-exam-username"></span> wurde keine Datei gefunden!
 </div>
 <iframe src="" id="er-exams-viewer"width="1000" height="1420">
-
-
 <? endif; ?>
