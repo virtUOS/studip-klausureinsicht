@@ -56,7 +56,7 @@ class SettingsController extends StudipController
         }
 
         if ((Request::get('folder_id') != '')) { 
-            $folder_id = STUDIP\Markup::purifyHtml(Request::option('folder_id'));
+            $folder_id = Request::option('folder_id');
         } else {
             return $this->redirect('settings');
         }
@@ -72,7 +72,7 @@ class SettingsController extends StudipController
 
         $exam_review_folder->store();
 
-        $this->redirect('settings?cid='.$this->cid);
+        $this->redirect('settings');
 
     }
 
