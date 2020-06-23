@@ -55,7 +55,7 @@ class SettingsController extends StudipController
             throw new AccessDeniedException('Sie verfügen nicht über die notwendigen Rechte für diese Aktion.');
         }
 
-        if ((Request::get('folder_id') != '') && (Request::get('cid') != '')) { 
+        if ((Request::get('folder_id') != '')) { 
             $folder_id = STUDIP\Markup::purifyHtml(Request::option('folder_id'));
         } else {
             return $this->redirect('settings');

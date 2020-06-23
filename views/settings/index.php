@@ -36,7 +36,7 @@
     <? if ($seminar_folders): ?>
         <div class="er-settings-select er-settings-box">
             <header class="er-settings-header">Versteckten Ordner Auswählen</header>
-            <form action="settings/store_folder" class="er-settings-folder">
+            <form action="<?= $controller->link_for('settings/store_folder') ?>" method="post" class="er-settings-folder default">
                 <select name="folder_id">
                     <? foreach($seminar_folders as $folder): ?>
                         <option value="<?=$folder->id ?>"><?= $folder->name?></option>
