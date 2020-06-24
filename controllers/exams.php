@@ -60,6 +60,5 @@ class ExamsController extends StudipController
                 array_multisort($nachname, SORT_ASC, $this->seminar_users);
             }
         }
-
     }
 }

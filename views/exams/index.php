@@ -7,7 +7,10 @@
         ['Es sollten nur Ordner vom Typ "Unsichtbarer Ordner" mit gewählter Option "Zugriff auf Dateien per Link erlauben" verwendet werden']
         ); ?>
 <? endif; ?>
-<? if(!$hasNoFolder && !$hasWrongFolder): ?>
+<? if(sizeOf($seminar_users) == 0): ?>
+    <?= \MessageBox::info('In dieser Veranstaltung befinden sich derzeit keine Studierenden.'); ?>
+<? endif; ?>
+<? if(!$hasNoFolder && !$hasWrongFolder && sizeOf($seminar_users) != 0): ?>
 <label class="er-label">Teilnehmende</label><br><select id="er-exams-select-user">
 <? foreach ($seminar_users as $seminar_user): ?>
    <option data-found="<?= $seminar_user['file_found']; ?>" data-nachname="<?= htmlReady($seminar_user['user_nachname']); ?>"  data-vorname="<?= htmlReady($seminar_user['user_vorname']); ?>"  value="<?= htmlReady($seminar_user['pdf_url']); ?>"><?= htmlReady($seminar_user['user_nachname']); ?>, <?= htmlReady($seminar_user['user_vorname']); ?> (<?= htmlReady($seminar_user['matrikelnummer']); ?>) </option>
