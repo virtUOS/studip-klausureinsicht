@@ -32,14 +32,14 @@ class Klausureinsicht extends StudIPPlugin implements StandardPlugin
     {
         $user  = $GLOBALS['user'];
 
-        if(!$GLOBALS['perm']->have_studip_perm('dozent', $course_id, $user->id)) {
+        if(!$GLOBALS['perm']->have_studip_perm('tutor', $course_id, $user->id)) {
             $navigation = new Navigation('Klausureinsicht', PluginEngine::getURL('klausureinsicht/index'));
             $navigation->setImage(Icon::create('file_pdf', 'info_alt'));
             $navigation->setActiveImage(Icon::create('file_pdf', 'info'));
             $navigation->addSubnavigation('index', clone $navigation);
         }
 
-        if($GLOBALS['perm']->have_studip_perm('dozent', $course_id, $user->id)) {
+        if($GLOBALS['perm']->have_studip_perm('tutor', $course_id, $user->id)) {
             $navigation = new Navigation('Klausureinsicht', PluginEngine::getURL('klausureinsicht/overview'));
             $overview = new Navigation('Übersicht');
             $overview->setUrl(PluginEngine::getURL('klausureinsicht/overview'));

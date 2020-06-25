@@ -18,7 +18,7 @@ class ExamsController extends StudipController
         $this->body_id = 'Klausureinsicht-exams';
         $this->cid = Context::getId();
 
-        if(!$perm->have_studip_perm('dozent', $this->cid)) {
+        if(!$perm->have_studip_perm('tutor', $this->cid)) {
             throw new AccessDeniedException('Sie verfügen nicht über die notwendigen Rechte für diese Aktion.');
         }
 

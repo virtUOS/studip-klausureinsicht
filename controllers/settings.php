@@ -18,7 +18,7 @@ class SettingsController extends StudipController
         $this->body_id = 'Klausureinsicht-settings';
         $this->cid = Context::getId();
 
-        if(!$perm->have_studip_perm('dozent', $this->cid)) {
+        if(!$perm->have_studip_perm('tutor', $this->cid)) {
             throw new AccessDeniedException('Sie verfügen nicht über die notwendigen Rechte für diese Aktion.');
         }
 
@@ -51,7 +51,7 @@ class SettingsController extends StudipController
 
         $this->cid = Context::getId();
 
-        if(!$perm->have_studip_perm('dozent', $this->cid)) {
+        if(!$perm->have_studip_perm('tutor', $this->cid)) {
             throw new AccessDeniedException('Sie verfügen nicht über die notwendigen Rechte für diese Aktion.');
         }
 
