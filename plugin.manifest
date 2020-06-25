@@ -1,7 +1,7 @@
 pluginname=Klausureinsicht
 pluginclassname=Klausureinsicht
 origin=elan-ev
-version=0.4.3
+version=0.4.4
 category=Sonstiges
 icon=../../../assets/images/icons/black/file-pdf.svg
 studipMinVersion=4.2
