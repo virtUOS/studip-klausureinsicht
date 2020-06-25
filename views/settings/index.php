@@ -9,17 +9,23 @@
             Bitte legen Sie einen Ordner vom Typ "Unsichtbarer Ordner" an und wählen Sie die Option "Zugriff auf Dateien per Link erlauben".'); ?>
 <? endif; ?>
 
-<label class="er-label">
-    Ordner für Klausuren
-</label>
 <form action="<?= $controller->link_for('settings/store_folder') ?>" method="post" class="default">
-    <select name="folder_id">
-        <? foreach($seminar_folders as $folder): ?>
-            <option value="<?= htmlReady($folder->id) ?>" <? if($folder->id == $selected_folder->id):?> selected <? endif;?>><?= htmlReady($folder->name)?></option>
-        <? endforeach ?>
-    </select>
-    <br>
-    <?= Studip\Button::createAccept('Auswahl speichern', 'submit') ?>
+    <fieldset class="default">
+        <legend>
+        Einstellungen
+        </legend>
+        <label>
+            Ordner für Klausuren
+            <select name="folder_id">
+                <? foreach($seminar_folders as $folder): ?>
+                    <option value="<?= htmlReady($folder->id) ?>" <? if($folder->id == $selected_folder->id):?> selected <? endif;?>><?= htmlReady($folder->name)?></option>
+                <? endforeach ?>
+            </select>
+        </label>
+    </fieldset>
+    <footer>
+        <?= Studip\Button::createAccept('speichern', 'submit') ?>
+    </footer>
 </form>
     
 
