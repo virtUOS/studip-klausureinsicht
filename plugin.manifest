@@ -5,6 +5,6 @@ version=0.4.4
 category=Sonstiges
 icon=../../../assets/images/icons/black/file-pdf.svg
 studipMinVersion=4.2
-studipMaxVersion=4.5.99
+studipMaxVersion=5.5.99
 descriptionshort=Einsicht von Klausuren
 descriptionlong=Mit der Klausureinsicht kann Studierenden eine bewertete Klausur in Form eines PDF-Dokumentes zur Verfügung gestellt werden.
